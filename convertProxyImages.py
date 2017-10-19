@@ -1,5 +1,5 @@
-#!/usr/bin/python
-# -*- coding: iso-8859-1 -*-
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 
 try:
     from Tkinter import *
@@ -95,17 +95,13 @@ def Print_entry():
   path = convertToJpgProxy(str(var.get()),'png')
   return path
 
-##def sel():
-##   selection = "You selected the option " + str(var.get())
 
 
 if __name__ == '__main__':
   root = Tk()
   root.title('Convierte a proxys')
-##  tkvar = StringVar(root)
-##  tkvar.set(1)
-##  r1=Radiobutton(root, text="png", variable=tkvar, value=1,command=sel).pack( side = LEFT )
-##  r2=Radiobutton(root, text="jpg", variable=tkvar, value=2, command=sel).pack( side = LEFT)
+  root.iconbitmap(default='appConvert.ico')
+
   w, var = UserFileInput("", "Directory")
   varS= StringVar(root)
   Label( root, textvariable=varS ).pack()
@@ -117,7 +113,7 @@ if __name__ == '__main__':
 
   dirBut = Button(root, text='Buscar', command = askdirectory).pack(side=LEFT)
   getBut = Button(root, text='Convertir a Proxy',width=50 ,command = Print_entry).pack(side=LEFT)
-##  btnExit = Button(root, text='Salir', command=root.destroy).pack(side=LEFT)
+
 
 
   root.mainloop()
