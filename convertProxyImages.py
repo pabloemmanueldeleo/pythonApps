@@ -31,7 +31,6 @@ def convertImage( fullPathFileExt='', newSize=( 100, 100 ) ):
             img.convert('RGB')
             a=img.save(newNamefile)
             varStatus.set('Se creo el proxy -->' + newNamefile)
-            print 'Se creo el proxy -->' + newNamefile
         except IOError:
             varStatus.set('cannot convert -->' + fullPathFileExt)
             print("cannot convert", fullPathFileExt)
@@ -55,22 +54,23 @@ def convertToJpgProxy(path='O:\EMPRESAS\RIG_FACE2D\PERSONAJES\MILO\FACES',search
     path = abspath(path)
     if exists(path):
         print 'Comienza la conversion'
+        varS.set('Comienza la conversion')
         directorios = {}
         dirs= [f for f in listdir(path) if not isfile(join(path, f))]#only list folders
         if dirs:
             print 'Convertira las imagenes en los subdirectorios.'
-            varStatus.set('Convertira las imagenes en los subdirectorios.')
+            varS.set('Convertira las imagenes en los subdirectorios.')
             for subdir in dirs:
                 fullPathFile = path+'\\'+subdir+'\\'
                 listFiles(fullPathFile)
         else:
             print 'Convertira las imagenes que estan en este directorio por que no contiene subdirectorios.'
-            varStatus.set('Convertira las imagenes que estan en este directorio por que no contiene subdirectorios.')
+            varS.set('Convertira las imagenes que estan en este directorio por que no contiene subdirectorios.')
             fullPathFile = path+'\\'
             listFiles(fullPathFile)
     else:
         print 'No es un directorio existente.'
-        varStatus.set('No es un directorio existente.')
+        varS.set('No es un directorio existente.')
 
 def askdirectory():
   dirname = tkFileDialog.askdirectory()
@@ -107,10 +107,14 @@ if __name__ == '__main__':
 ##  r1=Radiobutton(root, text="png", variable=tkvar, value=1,command=sel).pack( side = LEFT )
 ##  r2=Radiobutton(root, text="jpg", variable=tkvar, value=2, command=sel).pack( side = LEFT)
   w, var = UserFileInput("", "Directory")
+  varS= StringVar(root)
+  Label( root, textvariable=varS ).pack()
+  varS.set('Ninguna proceso aun..',)
+
   varStatus = StringVar(root)
-  status = Label( root, textvariable=varStatus )
-  status.pack()
-  varStatus.set('Ninguna proceso aun..',)
+  status = Label( root, textvariable=varStatus ).pack()
+  varStatus.set('...')
+
   dirBut = Button(root, text='Buscar', command = askdirectory).pack(side=LEFT)
   getBut = Button(root, text='Convertir a Proxy',width=50 ,command = Print_entry).pack(side=LEFT)
 ##  btnExit = Button(root, text='Salir', command=root.destroy).pack(side=LEFT)
